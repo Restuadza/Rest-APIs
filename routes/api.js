@@ -424,22 +424,20 @@ router.get("/download/tiktok", (req, res, next) => {
 	var url = req.query.url;
 	if (!apikey) return res.json(loghandler.noapikey);
 	if (!url)
-		return res.json({
-			status: false,
-			creator: `Zeltoria`,
-			message: "Linknya Mana Anying?",
-		});
-	if (listkey.includes(apikey)) {
-		scr.savefrom(url).then((data) => {
-			if (!data.status) {
-				return res.json(loghandler.error);
-			}
-			res.json(data[0]);
-		});
-	} else {
-		res.json(loghandler.apikey);
-	}
-});
+let ttlu = await fetch(`https://api.tiklydown.me/api/download?url=${url}`)
+.then(response => response.json())
+.then(data => {
+		res.json({
+      		status: true,
+      		creator: "VamsesOfficial",
+      		result: data,
+      	})  	
+      })
+            .catch((err) => {
+        console.log(err)
+        res.json({ message: "Terjadi kesalahan !" })
+    })
+})
 router.get("/download/ytmp3", async (req, res, next) => {
 	var apikey = req.query.apikey;
 	var url = req.query.url;
