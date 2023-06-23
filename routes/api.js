@@ -434,7 +434,7 @@ router.get("/download/tiktok", (req, res, next) => {
 			if (!data.status) {
 				return res.json(loghandler.error);
 			}
-			res.json(data);
+			res.json(data[0]);
 		});
 	} else {
 		res.json(loghandler.apikey);
