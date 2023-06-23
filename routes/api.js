@@ -430,7 +430,7 @@ router.get("/download/tiktok", (req, res, next) => {
 			message: "Linknya Mana Anying?",
 		});
 	if (listkey.includes(apikey)) {
-		Tiktok(url).then((data) => {
+		scr.savefrom(url).then((data) => {
 			if (!data.status) {
 				return res.json(loghandler.error);
 			}
